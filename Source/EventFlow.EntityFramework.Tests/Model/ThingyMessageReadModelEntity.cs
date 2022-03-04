@@ -23,6 +23,8 @@
 
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using EventFlow.Aggregates;
 using EventFlow.ReadStores;
 using EventFlow.TestHelpers.Aggregates;
@@ -42,19 +44,23 @@ namespace EventFlow.EntityFramework.Tests.Model
 
         public string Message { get; set; }
 
-        public void Apply(IReadModelContext context, IDomainEvent<ThingyAggregate, ThingyId, ThingyMessageAddedEvent> domainEvent)
+        public Task ApplyAsync(IReadModelContext context, IDomainEvent<ThingyAggregate, ThingyId, ThingyMessageAddedEvent> domainEvent, CancellationToken cancellationToken)
         {
             ThingyId = domainEvent.AggregateIdentity.Value;
             Message = domainEvent.AggregateEvent.ThingyMessage.Message;
+
+            return null;
         }
 
-        public void Apply(IReadModelContext context, IDomainEvent<ThingyAggregate, ThingyId, ThingyMessageHistoryAddedEvent> domainEvent)
+        public Task ApplyAsync(IReadModelContext context, IDomainEvent<ThingyAggregate, ThingyId, ThingyMessageHistoryAddedEvent> domainEvent, CancellationToken cancellationToken)
         {
             ThingyId = domainEvent.AggregateIdentity.Value;
 
             var messageId = new ThingyMessageId(context.ReadModelId);
             var thingyMessage = domainEvent.AggregateEvent.ThingyMessages.Single(m => m.Id == messageId);
             Message = thingyMessage.Message;
+
+            return null;
         }
 
         public ThingyMessage ToThingyMessage()

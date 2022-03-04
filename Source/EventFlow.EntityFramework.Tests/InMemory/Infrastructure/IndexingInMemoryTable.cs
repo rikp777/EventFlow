@@ -77,10 +77,20 @@ namespace EventFlow.EntityFramework.Tests.InMemory.Infrastructure
             _innerTable.Update(entry);
         }
 
-        public InMemoryIntegerValueGenerator<TProperty> GetIntegerValueGenerator<TProperty>(IProperty property)
+        public InMemoryIntegerValueGenerator<TProperty> GetIntegerValueGenerator<TProperty>(IProperty property, IReadOnlyList<IInMemoryTable> tables)
         {
-            return _innerTable.GetIntegerValueGenerator<TProperty>(property);
+            return _innerTable.GetIntegerValueGenerator<TProperty>(property, tables);
         }
+
+        public void BumpValueGenerators(object?[] row)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<object?[]> Rows { get; }
+        public IInMemoryTable? BaseTable { get; }
+        public IEntityType EntityType { get; }
+        
 
         private struct IndexEntry
         {

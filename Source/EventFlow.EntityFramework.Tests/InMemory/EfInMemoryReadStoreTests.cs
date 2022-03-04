@@ -36,13 +36,13 @@ namespace EventFlow.EntityFramework.Tests.InMemory
     {
         protected override Type ReadModelType => typeof(ThingyReadModelEntity);
 
-        protected override IRootResolver CreateRootResolver(IEventFlowOptions eventFlowOptions)
-        {
-            return eventFlowOptions
-                .ConfigureEntityFramework(EntityFrameworkConfiguration.New)
-                .AddDbContextProvider<TestDbContext, InMemoryDbContextProvider>(Lifetime.Singleton)
-                .ConfigureForReadStoreTest()
-                .CreateResolver();
-        }
+        // protected override IRootResolver CreateRootResolver(IEventFlowOptions eventFlowOptions)
+        // {
+        //     return eventFlowOptions
+        //         .ConfigureEntityFramework(EntityFrameworkConfiguration.New)
+        //         .AddDbContextProvider<TestDbContext, InMemoryDbContextProvider>(Lifetime.Singleton)
+        //         .ConfigureForReadStoreTest()
+        //         .CreateResolver();
+        // }
     }
 }

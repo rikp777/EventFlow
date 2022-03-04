@@ -45,7 +45,7 @@ namespace EventFlow.EntityFramework.Tests.MsSql
         protected override IRootResolver CreateRootResolver(IEventFlowOptions eventFlowOptions)
         {
             _testDatabase = MsSqlHelpz.CreateDatabase("eventflow");
-
+        
             return eventFlowOptions
                 .RegisterServices(sr => sr.Register(c => _testDatabase.ConnectionString))
                 .ConfigureEntityFramework(EntityFrameworkConfiguration.New)
@@ -55,11 +55,11 @@ namespace EventFlow.EntityFramework.Tests.MsSql
                 .CreateResolver();
         }
 
-        [TearDown]
-        public void TearDown()
-        {
-            _testDatabase.DisposeSafe("Failed to delete database");
-        }
+        // [TearDown]
+        // public void TearDown()
+        // {
+        //     _testDatabase.DisposeSafe("Failed to delete database");
+        // }
 
         [Test]
         public async Task ReadModelContainsPersonNameAfterCreation()
@@ -99,7 +99,7 @@ namespace EventFlow.EntityFramework.Tests.MsSql
                     CancellationToken.None)
                 .ConfigureAwait(false);
 
-            var address2 = new Address(AddressId.New, "Musterstraße 42.", "6541", "Berlin", "DE");
+            var address2 = new Address(AddressId.New, "Musterstraï¿½e 42.", "6541", "Berlin", "DE");
             await CommandBus
                 .PublishAsync(new AddAddressCommand(id, 
                         address2), 

@@ -41,7 +41,7 @@ namespace EventFlow.EntityFramework.Tests.MsSql
         protected override IRootResolver CreateRootResolver(IEventFlowOptions eventFlowOptions)
         {
             _testDatabase = MsSqlHelpz.CreateDatabase("eventflow");
-
+        
             return eventFlowOptions
                 .RegisterServices(sr => sr.Register(c => _testDatabase.ConnectionString))
                 .ConfigureEntityFramework(EntityFrameworkConfiguration.New)

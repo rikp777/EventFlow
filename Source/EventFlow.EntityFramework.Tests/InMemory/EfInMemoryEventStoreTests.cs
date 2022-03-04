@@ -27,6 +27,7 @@ using EventFlow.EntityFramework.Extensions;
 using EventFlow.EntityFramework.Tests.Model;
 using EventFlow.TestHelpers;
 using EventFlow.TestHelpers.Suites;
+using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 
 namespace EventFlow.EntityFramework.Tests.InMemory
@@ -34,13 +35,13 @@ namespace EventFlow.EntityFramework.Tests.InMemory
     [Category(Categories.Integration)]
     public class EfInMemoryEventStoreTests : TestSuiteForEventStore
     {
-        protected override IRootResolver CreateRootResolver(IEventFlowOptions eventFlowOptions)
-        {
-            return eventFlowOptions
-                .ConfigureEntityFramework(EntityFrameworkConfiguration.New)
-                .AddDbContextProvider<TestDbContext, InMemoryDbContextProvider>(Lifetime.Singleton)
-                .ConfigureForEventStoreTest()
-                .CreateResolver();
-        }
+        // protected override IRootResolver CreateRootResolver(IEventFlowOptions eventFlowOptions)
+        // {
+        //     return eventFlowOptions
+        //         .ConfigureEntityFramework(EntityFrameworkConfiguration.New)
+        //         .AddDbContextProvider<TestDbContext, InMemoryDbContextProvider>(ServiceLifetime.Singleton)
+        //         .ConfigureForEventStoreTest()
+        //         .CreateResolver();
+        // }
     }
 }

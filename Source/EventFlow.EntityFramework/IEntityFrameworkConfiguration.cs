@@ -1,4 +1,4 @@
-// The MIT License (MIT)
+﻿// The MIT License (MIT)
 // 
 // Copyright (c) 2015-2021 Rasmus Mikkelsen
 // Copyright (c) 2015-2021 eBay Software Foundation
@@ -27,6 +27,5 @@ namespace EventFlow.EntityFramework
 {
     public interface IEntityFrameworkConfiguration
     {
-        void Apply(IServiceRegistration serviceRegistration);
     }
 }
